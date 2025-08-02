@@ -6,6 +6,7 @@ const axios = require('axios');
 app.get('/', async (req, res) => {
   //res.send('Hello World!');
     try {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         const response = await axios.get('https://jbbs.shitaraba.net/bbs/rawmode.cgi/internet/26196/1735542868/');
         res.json(response.data);
     } catch (error) {
