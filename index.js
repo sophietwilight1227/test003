@@ -10,7 +10,11 @@ app.get('/', async (req, res) => {
     try {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Content-Type', 'text/plain');
-        const url = 'https://jbbs.shitaraba.net/bbs/rawmode.cgi/internet/26196/1735542868/'
+        //const url = 'https://jbbs.shitaraba.net/bbs/rawmode.cgi/internet/26196/1735542868/'
+        const url1 = req.query.url1;
+        const url2 = req.query.url2;
+        const url3 = req.query.url3;
+        const url = "https://jbbs.shitaraba.net/bbs/rawmode.cgi/" + url1.toString() + "/" + url2.toString() + "/" + url3.toString() + "/";
         const response = await axios.get(url, {responseType: "arraybuffer",  transformResponse: [ (data) => {
                                         return iconv.decode(data, 'EUCJP').toString()
                                     }]})
