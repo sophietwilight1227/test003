@@ -8,7 +8,7 @@ app.get('/', async (req, res) => {
     try {
         res.setHeader('Access-Control-Allow-Origin', '*');
         const response = await axios.get('https://jbbs.shitaraba.net/bbs/rawmode.cgi/internet/26196/1735542868/');
-        res.json(response.data);
+        res.text(response.data);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Something went wrong' });
