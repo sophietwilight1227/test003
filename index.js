@@ -6,6 +6,16 @@ const axios = require('axios');
 const iconv = require('iconv-lite');
 const Encoding = require('encoding-japanese');
 
+const bodyParser = require('body-parser');
+// urlencodedとjsonは別々に初期化する
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+app.use(bodyParser.json());
+app.use(express.json()); 
+
+var cors = require('cors');
+app.use(cors());
 
 function string_to_buffer(src) {
   return (new Uint16Array([].map.call(src, function(c) {
@@ -36,55 +46,13 @@ function convEUCJP (str){
   return Encoding.urlEncode(strArray);
 };
 
-app.get('/test', async (req, res) => {
-  const date = Math.round((new Date()).getTime() / 1000).toString();
-  let rawUrl = 'https://jbbs.shitaraba.net/bbs/read.cgi/internet/25499/1604056991/'
-  const data = { dir : "internet", 
-                  bbs: "25499",
-                  time: date,
-                  name: convEUCJP(""),
-                  mail: convEUCJP("sage"),
-                  message: convEUCJP("変換テスト"),
-                  key : "1604056991" }
-  let url = 'https://jbbs.shitaraba.net/bbs/write.cgi/internet/25499/1604056991/';
-  url += ("?DIR=" + data.dir)
-  url += ("&BBS=" + data.bbs)
-  url += ("&TIME=" + data.time)
-  url += ("&NAME=" + data.name)
-  url += ("&MAIL=" + data.mail)
-  url += ("&MESSAGE=" + data.message)
-  url += ("&KEY=" + data.key)
-  url += "/"
-  const headers = {
-            'Referer': rawUrl,
-            'User-Agent': 'JaneStyle/3.74',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            //'Content-Type': 'text/plain',
-            'Access-Control-Allow-Origin': '*',
-  }
-   const response = axios.post(url, data, {headers: headers})
-
-          .then(() => {
-              console.log(url)
-              res.send('success')
-          })
-
-          .catch(err => {
-          if(err != null){
-            console.log('err', iconv.decode(err.toString(), 'EUCJP'));
-          }
-          //console.log('err', err)
-          res.send('err', err)
-          //res.send('err', iconv.decode(err.data, 'EUCJP').toString())
-          });
-  //res.send('POST request to the homepage')
-})
-
 app.get('/', async (req, res) => {
   console.log("test")
   //res.send('Hello World!');
     try {
         res.setHeader('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
         res.setHeader('Content-Type', 'text/plain');
         //const url = 'https://jbbs.shitaraba.net/bbs/rawmode.cgi/internet/26196/1735542868/'
         const url1 = req.query.url1;
@@ -104,15 +72,19 @@ app.get('/', async (req, res) => {
 
 
 // POST method route
-app.post('/', (req, res) => {
+app.post('/',async (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
         res.setHeader('Content-Type', 'text/plain');
-  const url1 = req.query.url1.toString();
-  const url2 = req.query.url2.toString();
-  const url3 = req.query.url3.toString();
-  const name = req.query.name.toString();
-  const mail = req.query.mail.toString();
-  const message = req.query.message;
+  const rawData = req.body;
+  const url1 = rawData.url1;
+  const url2 = rawData.url2;
+  const url3 = rawData.url3;
+  const name = rawData.name;
+  const mail = rawData.mail;
+  const message = rawData.message;
 
   const date = Math.round((new Date()).getTime() / 1000).toString();
   let rawUrl = "https://jbbs.shitaraba.net/bbs/read.cgi/" + url1 + "/" + url2 + "/" + url3 + "/";
@@ -133,13 +105,16 @@ app.post('/', (req, res) => {
   url += ("&KEY=" + data.key)
   url += "/"
   const headers = {
+            'Access-Control-Allow-Origin': '*',
+            //"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", // Specify allowed methods
+            //"Access-Control-Allow-Headers": "Content-Type, Authorization", // Specify allowed headers
+            //"Access-Control-Max-Age": 86400, 
             'Referer': rawUrl,
             'User-Agent': 'JaneStyle/3.74',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Type': 'text/plain',
-            'Access-Control-Allow-Origin': '*',
+            //'Content-Type': 'text/plain',
   }
-   const response = axios.post(url, data, {headers: headers})
+   const response = await axios.post(url, data, {headers: headers})
 
           .then(() => {
               console.log(url)
