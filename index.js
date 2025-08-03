@@ -134,7 +134,7 @@ app.post('/', (req, res) => {
             'Referer': rawUrl,
             'User-Agent': 'JaneStyle/3.74',
             'Content-Type': 'application/x-www-form-urlencoded',
-            //'Content-Type': 'text/plain',
+            'Content-Type': 'text/plain',
             'Access-Control-Allow-Origin': '*',
   }
    const response = axios.post(url, data, {headers: headers})
