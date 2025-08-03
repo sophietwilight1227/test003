@@ -105,6 +105,8 @@ app.get('/', async (req, res) => {
 
 // POST method route
 app.post('/', (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Content-Type', 'text/plain');
   const url1 = req.query.url1.toString();
   const url2 = req.query.url2.toString();
   const url3 = req.query.url3.toString();
