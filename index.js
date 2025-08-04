@@ -16,7 +16,9 @@ app.use(express.json());
 
 const cors = require('cors');
 app.use(cors({
-       origin: 'http://localhost:5173',
+      origin: 'http://localhost:5173',
+      credentials: true,
+      optionsSuccessStatus: 200
      }));
 
 function string_to_buffer(src) {
