@@ -74,10 +74,10 @@ app.get('/', async (req, res) => {
 // POST method route
 app.post('/',async (req, res) => {
 
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        //res.setHeader('Content-Type', 'application/json');
+        //res.setHeader('Access-Control-Allow-Origin', '*');
+        //res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        //res.header('Access-Control-Allow-Headers', 'Content-Type');
         //res.setHeader('Content-Type', 'text/plain');
   const rawData = req.body;
   const url1 = rawData.url1;
@@ -106,10 +106,10 @@ app.post('/',async (req, res) => {
   url += ("&KEY=" + data.key)
   url += "/"
   const headers = {
-            'Access-Control-Allow-Origin': '*',
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", // Specify allowed methods
-            "Access-Control-Allow-Headers": "Content-Type, Authorization", // Specify allowed headers
-            "Access-Control-Max-Age": 86400, 
+            //'Access-Control-Allow-Origin': '*',
+            //"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", // Specify allowed methods
+            //"Access-Control-Allow-Headers": "Content-Type, Authorization", // Specify allowed headers
+            //"Access-Control-Max-Age": 86400, 
             'Referer': rawUrl,
             'User-Agent': 'JaneStyle/3.74',
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -126,10 +126,11 @@ app.post('/',async (req, res) => {
           if(err != null){
             console.log('err', iconv.decode(err.toString(), 'EUCJP'));
             res.send('error', iconv.decode(err.toString(), 'EUCJP'))
+          }else{
+            //console.log('err', err)
+            res.send('err', err)
+            //res.send('err', iconv.decode(err.data, 'EUCJP').toString())            
           }
-          //console.log('err', err)
-          res.send('err', err)
-          //res.send('err', iconv.decode(err.data, 'EUCJP').toString())
           });
 })
 
