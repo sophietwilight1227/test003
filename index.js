@@ -73,8 +73,6 @@ app.get('/', async (req, res) => {
 
 // POST method route
 app.post('/',async (req, res) => {
-  res.send('success_default');
-  return;
         //res.setHeader('Content-Type', 'application/json');
         //res.setHeader('Access-Control-Allow-Origin', '*');
         //res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
