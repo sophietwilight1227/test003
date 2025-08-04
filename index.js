@@ -74,9 +74,9 @@ app.get('/', async (req, res) => {
 // POST method route
 app.post('/',async (req, res) => {
         //res.setHeader('Content-Type', 'application/json');
-        //res.setHeader('Access-Control-Allow-Origin', '*');
-        //res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-        //res.header('Access-Control-Allow-Headers', 'Content-Type');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         //res.setHeader('Content-Type', 'text/plain');
   const rawData = req.body;
   const url1 = rawData.url1;
