@@ -104,6 +104,9 @@ app.post('/',async (req, res) => {
   url += ("&MESSAGE=" + data.message)
   url += ("&KEY=" + data.key)
   url += "/"
+
+  res.send('err', url, data);
+    return;
   const headers = {
             //'Access-Control-Allow-Origin': '*',
             //"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", // Specify allowed methods
