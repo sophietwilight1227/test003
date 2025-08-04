@@ -15,7 +15,9 @@ app.use(bodyParser.json());
 app.use(express.json()); 
 
 const cors = require('cors');
-app.use(cors());
+app.use(cors({
+       origin: 'http://localhost:5173',
+     }));
 
 function string_to_buffer(src) {
   return (new Uint16Array([].map.call(src, function(c) {
