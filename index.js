@@ -106,9 +106,9 @@ app.post('/',async (req, res) => {
   url += "/"
   const headers = {
             'Access-Control-Allow-Origin': '*',
-            //"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", // Specify allowed methods
-            //"Access-Control-Allow-Headers": "Content-Type, Authorization", // Specify allowed headers
-            //"Access-Control-Max-Age": 86400, 
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", // Specify allowed methods
+            "Access-Control-Allow-Headers": "Content-Type, Authorization", // Specify allowed headers
+            "Access-Control-Max-Age": 86400, 
             'Referer': rawUrl,
             'User-Agent': 'JaneStyle/3.74',
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -124,7 +124,7 @@ app.post('/',async (req, res) => {
           .catch(err => {
           if(err != null){
             console.log('err', iconv.decode(err.toString(), 'EUCJP'));
-            res.send('error', err)
+            res.send('error', iconv.decode(err.toString(), 'EUCJP'))
           }
           //console.log('err', err)
           res.send('err', err)
