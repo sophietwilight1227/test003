@@ -119,7 +119,7 @@ app.post('/',async (req, res) => {
 
           .then(() => {
               console.log(url)
-              res.send('success_')
+              res.send('success')
           })
 
           .catch(err => {
