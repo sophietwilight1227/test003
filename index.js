@@ -123,7 +123,7 @@ app.post('/',async (req, res) => {
           .catch(err => {
           if(err != null){
             //console.log('err', iconv.decode(err.toString(), 'EUCJP'));
-            res.send('error', err.message)
+            res.send('error', err.response)
           }else{
             //console.log('err', err)
             res.send('err', response.data)
