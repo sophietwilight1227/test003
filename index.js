@@ -105,8 +105,6 @@ app.post('/',async (req, res) => {
   url += ("&KEY=" + data.key)
   url += "/"
 
-  res.send('err' + url + data.toString());
-    return;
   const headers = {
             //'Access-Control-Allow-Origin': '*',
             //"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", // Specify allowed methods
@@ -119,12 +117,12 @@ app.post('/',async (req, res) => {
   }
    const response = await axios.post(url, data, {headers: headers})
           .then(() => {
-              console.log(url)
+              //console.log(url)
               res.send('success_')
           })
           .catch(err => {
           if(err != null){
-            console.log('err', iconv.decode(err.toString(), 'EUCJP'));
+            //console.log('err', iconv.decode(err.toString(), 'EUCJP'));
             res.send('error', err)
           }else{
             //console.log('err', err)
