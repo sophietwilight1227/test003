@@ -96,8 +96,8 @@ app.post('/',async (req, res) => {
                   mail: convEUCJP(mail),
                   message: convEUCJP(message),
                   key : url3 }
-  let rawaWriteUrl = "https://jbbs.shitaraba.net/bbs/write.cgi/" + url1 + "/" + url2 + "/" + url3 + "/";
-  let url = rawaWriteUrl + ("?DIR=" + data.dir)
+  let url = "https://jbbs.shitaraba.net/bbs/write.cgi/" + url1 + "/" + url2 + "/" + url3 + "/";
+  url += ("?DIR=" + data.dir)
   url += ("&BBS=" + data.bbs)
   url += ("&TIME=" + data.time)
   url += ("&NAME=" + data.name)
@@ -111,11 +111,11 @@ app.post('/',async (req, res) => {
             //"Access-Control-Allow-Headers": "Content-Type, Authorization", // Specify allowed headers
             //"Access-Control-Max-Age": 86400, 
             'Referer': rawUrl,
-            'User-Agent': 'JaneStyle/3.74',
+            //'User-Agent': 'JaneStyle/3.74',
             'Content-Type': 'application/x-www-form-urlencoded',
             //'Content-Type': 'text/plain',
   }
-   const response = await axios.post(rawaWriteUrl, data, {headers: headers})
+   const response = await axios.post(url, data, {headers: headers})
 
           .then(() => {
               console.log(url)
