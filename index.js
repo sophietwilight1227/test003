@@ -78,7 +78,7 @@ app.post('/',async (req, res) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
         res.header('Access-Control-Allow-Headers', 'Content-Type');
-        res.setHeader('Content-Type', 'text/plain');
+        //res.setHeader('Content-Type', 'text/plain');
   const rawData = req.body;
   const url1 = rawData.url1;
   const url2 = rawData.url2;
