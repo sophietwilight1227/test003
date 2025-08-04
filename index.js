@@ -105,7 +105,7 @@ app.post('/',async (req, res) => {
   url += ("&KEY=" + data.key)
   url += "/"
 
-  res.send('err', url, data);
+  res.send('err' + url + data.toString());
     return;
   const headers = {
             //'Access-Control-Allow-Origin': '*',
