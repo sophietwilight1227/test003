@@ -15,10 +15,7 @@ app.use(bodyParser.json());
 app.use(express.json()); 
 
 const cors = require('cors');
-app.use(cors({
-      credentials: true,
-      optionsSuccessStatus: 200
-     }));
+app.use(cors());
 
 function string_to_buffer(src) {
   return (new Uint16Array([].map.call(src, function(c) {
@@ -127,6 +124,7 @@ app.post('/',async (req, res) => {
           .catch(err => {
           if(err != null){
             console.log('err', iconv.decode(err.toString(), 'EUCJP'));
+            res.send('err', err)
           }
           //console.log('err', err)
           res.send('err', err)
