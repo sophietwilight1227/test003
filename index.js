@@ -14,25 +14,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(express.json()); 
 
-const allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Content-Type, Authorization, access_token'
-  )
-
-  // intercept OPTIONS method
-  if ('OPTIONS' === req.method) {
-    res.send(200)
-  } else {
-    next()
-  }
-}
-app.use(allowCrossDomain)
-
-//var cors = require('cors');
-//app.use(cors());
+const cors = require('cors');
+app.use(cors());
 
 function string_to_buffer(src) {
   return (new Uint16Array([].map.call(src, function(c) {
