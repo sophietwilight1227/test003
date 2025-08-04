@@ -125,7 +125,7 @@ app.post('/',async (req, res) => {
           .catch(err => {
           if(err != null){
             console.log('err', iconv.decode(err.toString(), 'EUCJP'));
-            res.send('error', iconv.decode(err.toString(), 'EUCJP'))
+            res.send('error', response.data)
           }else{
             //console.log('err', err)
             res.send('err', err)
