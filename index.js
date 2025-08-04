@@ -115,19 +115,17 @@ app.post('/',async (req, res) => {
             //'Content-Type': 'text/plain',
   }
    const response = await axios.post(url, data, {headers: headers})
-
           .then(() => {
               console.log(url)
               res.send('success_')
           })
-
           .catch(err => {
           if(err != null){
             console.log('err', iconv.decode(err.toString(), 'EUCJP'));
-            res.send('error', response.data)
+            res.send('error', err)
           }else{
             //console.log('err', err)
-            res.send('err', err)
+            res.send('err', response.data)
             //res.send('err', iconv.decode(err.data, 'EUCJP').toString())            
           }
           });
